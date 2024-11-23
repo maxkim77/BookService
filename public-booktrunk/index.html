@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인 깃허브</title>
+    <link rel="stylesheet" href="css/2week.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
+    <script>
+        $(function() {
+            var tabBar = $('.tab_bar');
+            var stickyOffset = tabBar.offset().top;
+
+            $(window).scroll(function() {
+                if ($(window).scrollTop() >= stickyOffset) {
+                    tabBar.addClass('sticky');
+                } else {
+                    tabBar.removeClass('sticky');
+                }
+            });
+
+            var header = $('#header');
+            var lastScrollTop = 0;
+            var delta = 5; // 스크롤 이벤트를 더 자연스럽게 처리하기 위한 값
+
+            $(window).scroll(function() {
+                var scrollTop = $(this).scrollTop();
+
+                if (Math.abs(lastScrollTop - scrollTop) <= delta)
+                    return;
+
+                if (scrollTop < lastScrollTop) {
+                    // 스크롤을 올릴 때
+                    header.addClass('visible');
+                } else {
+                    // 스크롤을 내릴 때
+                    header.removeClass('visible');
+                }
+
+                lastScrollTop = scrollTop;
+            });
+
+            // 회사서재 도서리뷰 리스트 탭메뉴
+            var elTabs = jQuery('#tabs li');
+            var elTabcontent = jQuery('.review_list_box');
+            elTabs.on('click', function() {
+                var activeTab = jQuery(this).attr('data-reviewtab');
+                elTabs.removeClass('on');
+                elTabcontent.removeClass('on');
+                jQuery(this).addClass('on');
+                jQuery('#' + activeTab).addClass('on');
+            });
+
+            // elTabs.on('click', function() {
+            //     jQuery("html, body").animate({
+            //         scrollTop : 950
+            //     }, 300);
+            // });
+
+            var elBtnTop = jQuery(".top_btn");
+            elBtnTop.click(function() {
+                jQuery("html, body").animate({
+                    scrollTop: 0
+                });
+                return false;
+            });
+
+            // // 더보기 버튼
+            // let $bookTitle = $('#book_title');
+            // let $bookContent = $bookTitle.find('.book_content');
+            // let $moreBtn = $bookTitle.find('.more-btn');
+
+            // // 텍스트가 5줄을 넘을 경우에만 더보기 버튼을 보이게 설정
+            // if ($bookContent[0].scrollHeight > $bookContent[0].clientHeight) {
+            //     $moreBtn.show();
+            // }
+        });
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="header_inner">
+                <h1>Book Trunk</h1>
+
+                <div class="pc_nav">
+                    <ul class="pc pc_gnb">
+                        <li class="depth01">
+                            <a href="#">소셜서재</a>
+                        </li><!-- depth01 -->
+
+                        <li class="depth01">
+                            <a href="#">회사서재</a>
+                        </li><!-- depth01 -->
+
+                        <li class="depth01">
+                            <a href="#">마이서재</a>
+                        </li><!-- depth01 -->
+                    </ul><!-- pc_gnb -->
+                </div><!-- pc_nav -->
+
+                <div class="pc util">
+                    <button class="bell">
+                        <img src="img/bell_icon.png" alt="알림">
+                    </button><!-- user -->
+                    <button class="bookmark">
+                        <img src="img/bookmark_icon.png" alt="북마크">
+                    </button><!-- bookmark -->
+                    <button class="user">
+                        <img src="img/user_icon.png" alt="프로필">
+                    </button><!-- user -->
+                </div><!-- util -->
+            </div><!-- header_inner -->
+        </header><!-- header -->
+
+        <section id="input_tab02">
+            <div class="input">
+                <div>
+                    <p>통합검색</p>
+                    <img src="img/arrow.png" alt="" class="arrow">
+                </div>
+                <img src="img/search_icon.png" alt="검색" class="search">
+                <input type="search" placeholder="키워드를 입력하세요.">
+            </div><!-- input -->
+
+            <div class="tab_bar">
+                <ul>
+                    <li>
+                        <a href="review_list.html">도서리뷰 리스트</a>
+                    </li>
+                    <li class="on">
+                        <a href="index.html">
+                            <img src="img/masang_logo.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="category.html">직무별 카테고리</a>
+                    </li>
+                </ul>
+            </div><!-- tab_bar -->
+        </section><!-- input_tab02 -->
+
+        <div class="top_btn">
+            <a href="#">
+                <img src="img/top_btn.png" alt="">
+            </a>
+        </div><!-- top_btn -->
+        <div class="writing_icon">
+            <a href="#">
+                <img src="img/writing_icon.png" alt="">
+            </a>
+        </div><!-- writing_icon -->
+
+        <section id="container02" class="cont01">
+            <div class="cont_inner">
+                <div id="tab_list01" class="best_review">
+                    <h1><img src="img/best_icon.png" alt="">마상소프트 베스트 리뷰</h1>
+                    <p>최근 한 달간 도서리뷰가 많이 작성된 순서입니다.</p>
+
+                    <div class="swiper card swiper-initialized swiper-horizontal swiper-backface-hidden">
+                        <div class="swiper-wrapper" id="swiper-wrapper-43174103ddef19cc5" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-1230px, 0px, 0px); transition-delay: 0ms;">
+                            <div class="swiper-slide" role="group" aria-label="1 / 12" data-swiper-slide-index="0">
+                                <div class="number">
+                                    <p>1</p>
+                                </div><!-- number -->
+                                <img src="img/book_blue.jpg" alt="파란책">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide" role="group" aria-label="2 / 12" data-swiper-slide-index="1">
+                                <div class="number">
+                                    <p>2</p>
+                                </div><!-- number -->
+
+                                <img src="img/book_brown.jpg" alt="브라운책">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide" role="group" aria-label="3 / 12" data-swiper-slide-index="2">
+                                <div class="number">
+                                    <p>3</p>
+                                </div><!-- number -->
+                                
+                                <img src="img/book_gray.jpg" alt="회색책">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide swiper-slide-prev" role="group" aria-label="4 / 12" data-swiper-slide-index="3">
+                                <div class="number">
+                                    <p>4</p>
+                                </div><!-- number -->
+                                
+                                <img src="img/book_green.jpg" alt="초록색">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide swiper-slide-active" role="group" aria-label="5 / 12" data-swiper-slide-index="4">
+                                <div class="number">
+                                    <p>5</p>
+                                </div><!-- number -->
+                                
+                                <img src="img/book_img.jpg" alt="책이미지">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide swiper-slide-next" role="group" aria-label="6 / 12" data-swiper-slide-index="5">
+                                <div class="number">
+                                    <p>6</p>
+                                </div><!-- number -->
+                                
+                                <img src="img/book_navy.jpg" alt="남색책">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide" role="group" aria-label="7 / 12" data-swiper-slide-index="0">
+                                <div class="number">
+                                    <p>7</p>
+                                </div><!-- number -->
+                                <img src="img/book_blue.jpg" alt="파란책">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide" role="group" aria-label="8 / 12" data-swiper-slide-index="1">
+                                <div class="number">
+                                    <p>8</p>
+                                </div><!-- number -->
+
+                                <img src="img/book_brown.jpg" alt="브라운책">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide" role="group" aria-label="9 / 12" data-swiper-slide-index="2">
+                                <div class="number">
+                                    <p>9</p>
+                                </div><!-- number -->
+                                
+                                <img src="img/book_gray.jpg" alt="회색책">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide" role="group" aria-label="10 / 12" data-swiper-slide-index="3">
+                                <div class="number">
+                                    <p>10</p>
+                                </div><!-- number -->
+                                
+                                <img src="img/book_green.jpg" alt="초록색">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide" role="group" aria-label="11 / 12" data-swiper-slide-index="4">
+                                <div class="number">
+                                    <p>11</p>
+                                </div><!-- number -->
+                                
+                                <img src="img/book_img.jpg" alt="책이미지">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+
+                            <div class="swiper-slide" role="group" aria-label="12 / 12" data-swiper-slide-index="5">
+                                <div class="number">
+                                    <p>12</p>
+                                </div><!-- number -->
+                                
+                                <img src="img/book_navy.jpg" alt="남색책">
+                                <div class="text">
+                                    <h1>책 제목이 들어갈 공간</h1>
+                                    <p>저자</p>
+                                </div><!-- text -->
+                            </div>
+                        </div><!-- swiper-wrapper -->
+
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div><!-- swiper -->
+                </div><!-- best_review -->
+                
+                <div id="tab_list01" class="review_list">
+                    <h1><img src="img/review_list_icon.png" alt="">도서 리뷰 리스트</h1>
+                    <p>사내 직원들이 등록한 도서 리뷰입니다.</p>
+
+                    <div class="review_list_tab">
+                        <ul id="tabs">
+                            <li data-reviewtab="review_menu01" class="on">최근등록순</li>
+                            <li data-reviewtab="review_menu02">오래된순</li>
+                            <li data-reviewtab="review_menu03">추천리뷰순</li>
+                        </ul>
+
+                        <div class="i_icon">
+                            <img src="img/i_icon.png" alt="">
+                        </div><!-- i_icon -->
+                    </div><!-- review_list_tab -->
+
+                    <div class="review_list_box on" id="review_menu01">
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/logo.png" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>짱구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/logo.png" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>짱구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/logo.png" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>짱구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/logo.png" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>짱구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/logo.png" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>짱구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/logo.png" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>짱구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                    </div><!-- review_list_box -->
+
+                    <div class="review_list_box" id="review_menu02">
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img02.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>마조리카</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img02.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>마조리카</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img02.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>마조리카</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img02.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>마조리카</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img02.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>마조리카</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img02.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>마조리카</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                    </div><!-- review_list_box -->
+
+                    <div class="review_list_box" id="review_menu03">
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img03.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>맹구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img03.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>맹구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img03.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>맹구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img03.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>맹구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img03.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>맹구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                        <div class="item">
+                            <a href="#">
+                                <div class="item_header">
+                                    <div>
+                                        <img src="img/user_img03.jpg" alt="프로필" class="item_header_user">
+    
+                                        <div class="name_text">
+                                            <h2>맹구</h2>
+                                            <p>웹 디자인</p>
+                                        </div><!-- name_test -->
+                                    </div>
+    
+                                    <div class="heart">
+                                        <img src="img/heart_icon.png" alt="좋아요">
+                                        <p>999+</p>
+                                    </div><!-- heart -->
+                                </div><!-- item_header -->
+    
+                                <div class="book_itme">
+                                    <div id="book_title">
+                                        <h3>책제목입니다</h3>
+                                        <div>
+                                            <p>개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네 개미는 뚠뚠 언제나 뚠뚠
+                                                열심히 일을 하네개미는 아무 말도 하지 않지만 땀을 뻘뻘 흘리면서
+                                                매일매일을 살기 위해서 열심히 일하네 한치앞도 모르는 험한 이 세상
+                                                그렇지만 오늘도 행복하다네 개미는 뚠뚠 오늘도 뚠뚠 열심히 일을 하네
+                                                개미는 뚠뚠 언제나 뚠뚠 열심히 일을 하네</p>  
+                                        </div>
+                                    </div><!-- book_title -->
+    
+                                    <div class="book_img">
+                                        <img src="img/book_pink.jpg" alt="책이미지입니다">
+                                    </div><!-- book_img -->
+                                </div><!-- book_item -->
+                            </a>
+                        </div><!-- item -->
+                    </div><!-- review_list_box -->
+
+                    <div class="plus_icon">
+                        <a href="#">더 보기</a>
+                    </div><!-- plus_icon -->
+                </div><!-- review_list -->
+
+                <div id="tab_list01" class="team_category">
+                    <h1><img src="img/People_icon.png" alt="">직무별 카테고리</h1>
+                    <p>직무별 도서 리뷰를 확인할 수 있습니다.</p>
+
+                    <div class="category_list">
+                        <div class="box">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box02">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box02">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+                        
+                        <div class="box">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box02">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box02">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+                        
+                        <div class="box">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box02">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+
+                        <div class="box02">
+                            <a href="#">
+                                <div class="team_right_icon">
+                                    <img src="img/team_right_btn.png" alt="">
+                                </div><!-- team_right_icon -->
+
+                                <div class="book_box">
+                                    <img src="img/book_blue.jpg" alt="">
+                                    <img src="img/book_img02.jpg" alt="">
+                                    <img src="img/book_red.jpg" alt="">
+                                </div><!-- book_box -->
+
+                                <div class="team_text">
+                                    <div class="team_img_text">
+                                        <div class="team_img">
+                                            <img src="img/People_icon.png" alt="">
+                                        </div><!-- team_img -->
+
+                                        <div class="title">
+                                            <h1 class="text_title">웹플랫폼<img src="img/new_icon.png" alt=""></h1>
+                                            <p class="text_sub">40권</p>
+                                        </div><!-- title -->
+                                    </div><!-- team_img_text -->
+
+                                    <div class="team_user">
+                                        <img src="img/logo.png" alt="">
+                                        <img src="img/user_icon.png" alt="">
+                                        <img src="img/user_img02.jpg" alt="">
+                                        <div class="team_user_number">
+                                            <img src="img/user_img03.jpg" alt="">
+                                        </div><!-- team_user_number -->
+                                    </div><!-- team_user -->
+                                </div><!-- team_text -->
+                            </a>
+                        </div><!-- box -->
+                    </div><!-- category_list -->
+
+                    <div class="category_plus_icon">
+                        <a href="#">전체보기</a>
+                    </div><!-- plus_icon -->
+                </div><!-- team_Category -->
+            </div><!-- cont_inner -->
+        </section><!-- cont01 -->
+    </div><!-- wrap -->
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".card", {
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+                },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+                },
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+                loop: true,
+                slidesPerView: 5,
+                centeredSlides:true,
+                spaceBetween: 30,
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploying application"
+  when: manual
